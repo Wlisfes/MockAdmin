@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-05-12 17:40:42 
  * @Last Modified by: Parker
- * @Last Modified time: 2019-05-12 18:09:34
+ * @Last Modified time: 2019-05-13 17:17:00
  * @Types 图片上传
  */
 
@@ -30,6 +30,6 @@ export const upload = async (ctx) => {
     Reply(ctx, {
         code: 200,
         message: 'ok',
-        data: `localhost:9999/static/${ctx.req.file.filename}`
+        url: `localhost:9999/static/${ctx.req.file.filename}`
     })
 }
