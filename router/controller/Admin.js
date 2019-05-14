@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-05-11 00:47:21 
  * @Last Modified by: Parker
- * @Last Modified time: 2019-05-14 17:54:00
+ * @Last Modified time: 2019-05-14 22:12:34
  * @Types 管理员用户模块
  */
 
@@ -79,9 +79,38 @@ export const EnrolMent = async (ctx) => {
 
 //登录
 export const login = async (ctx) => {
-    let { username,password } = ctx.request.body
-    Reply(ctx, {
-        code: 200,
-        message: 'ok'
-    })
+    let { name,password } = ctx.request.body
+
+    if (!name) {
+        Reply(ctx, { code: 201, message: 'error name null' })
+        return
+    }
+
+    else if (!password) {
+        Reply(ctx, { code: 201, message: 'error password null' })
+        return
+    }
+    
+    try {
+        let res = await bd(`SELECT * FROM adminuser WHERE name='${name}'`)
+
+        if (res.length > 0) {
+            if (res[0].password === password) {
+                Reply(ctx, {
+                    code: 200,
+                    message: '登录成功！',
+                    data: res[0]
+                })
+            } else {
+                Reply(ctx, { code: 203, message: '密码错误！' })
+                return
+            }
+        } else {
+            Reply(ctx, { code: 203, message: '账户名错误！' })
+            return
+        }
+    } catch (error) {
+        Reply(ctx, { code: 202, message: '登录失败！' })
+        return
+    }
 }
