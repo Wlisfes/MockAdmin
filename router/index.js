@@ -2,7 +2,7 @@
  * @Author: Parker 
  * @Date: 2019-05-10 16:53:29 
  * @Last Modified by: Parker
- * @Last Modified time: 2019-05-14 17:54:10
+ * @Last Modified time: 2019-05-17 16:32:26
  */
 
 
@@ -23,7 +23,8 @@ export default class {
         router.get('/', this.index)
         router.post('/Admin/enrolment', Admin.EnrolMent)
         router.post('/Admin/login', Admin.login)
-        router.post('/Admin/upload', Stctic.single('file'), upload)
+        router.get('/Admin/alluser', Admin.AllUser)
+        router.post('/upload', Stctic.single('file'), upload)
 
         this.Mount(router)
     }

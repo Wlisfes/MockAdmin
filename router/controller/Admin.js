@@ -2,7 +2,7 @@
  * @Author: 情雨随风 
  * @Date: 2019-05-11 00:47:21 
  * @Last Modified by: Parker
- * @Last Modified time: 2019-05-14 22:12:34
+ * @Last Modified time: 2019-05-17 16:54:49
  * @Types 管理员用户模块
  */
 
@@ -114,3 +114,17 @@ export const login = async (ctx) => {
         return
     }
 }
+
+
+//获取所有用户
+export const AllUser = async (ctx) => {
+    try {
+        let res = await bd(`SELECT * FROM adminuser`)
+        Reply(ctx, { code: 200, message: 'ok', data: res })
+    } catch (error) {
+        Reply(ctx, { code: 201, message: '查询失败！' })
+        return
+    }
+}
+
+
